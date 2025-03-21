@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rababaya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 13:20:43 by rababaya          #+#    #+#             */
-/*   Updated: 2025/03/21 18:23:58 by rababaya         ###   ########.fr       */
+/*   Created: 2025/03/21 16:22:20 by rababaya          #+#    #+#             */
+/*   Updated: 2025/03/21 18:11:05 by rababaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void	status_handler(int sig)
 {
 	(void)sig;
 	g_status = 1;
+}
+
+void	success_execution(int sig)
+{
+	(void)sig;
+	ft_putstr_fd("Successfully sended message!\n", 1);
+	exit(1);
 }
 
 void	send_bit(char sending, pid_t server_pid)
@@ -45,18 +52,25 @@ void	send_bit(char sending, pid_t server_pid)
 	}
 }
 
+void	signal_setuper(struct sigaction *sa, void (*handler)(int), int signal)
+{
+	sa->sa_handler = handler;
+	sa->sa_flags = SA_RESTART;
+	if (sigaction(signal, sa, NULL) == -1)
+		error_handler("Sigaction error:");
+}
+
 int	main(int argc, char **argv)
 {
 	pid_t				server_pid;
 	unsigned char		*message;
 	struct sigaction	status_changer;
+	struct sigaction	success_checker;
 
 	if (argc == 3)
 	{
-		status_changer.sa_handler = &status_handler;
-		status_changer.sa_flags = SA_RESTART;
-		if (sigaction(SIGUSR1, &status_changer, NULL) == -1)
-			error_handler("Sigaction error:");
+		signal_setuper(&status_changer, &status_handler, SIGUSR1);
+		signal_setuper(&success_checker, &success_execution, SIGUSR2);
 		server_pid = ft_atoi(argv[1]);
 		message = (unsigned char *)argv[2];
 		while (*message)
@@ -68,4 +82,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_putstr_fd("Wrong argument number", 2);
+	while (1)
+		pause();
 }

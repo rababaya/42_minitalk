@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rababaya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 17:04:11 by rababaya          #+#    #+#             */
-/*   Updated: 2025/03/21 18:26:30 by rababaya         ###   ########.fr       */
+/*   Created: 2025/03/21 16:30:39 by rababaya          #+#    #+#             */
+/*   Updated: 2025/03/21 18:26:58 by rababaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 	if (bit == 8)
 	{
 		write(1, &a, 1);
+		if (a == '\0')
+		{
+			if (kill(info->si_pid, SIGUSR2))
+				error_handler("Kill error:");
+		}
 		bit = 0;
 		a = 0;
 	}
