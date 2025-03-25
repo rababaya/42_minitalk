@@ -6,11 +6,11 @@
 /*   By: rababaya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:30:39 by rababaya          #+#    #+#             */
-/*   Updated: 2025/03/21 18:26:58 by rababaya         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:07:02 by rababaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	sig_handler(int sig, siginfo_t *info, void *ucontext)
 {

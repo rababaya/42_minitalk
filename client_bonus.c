@@ -6,11 +6,11 @@
 /*   By: rababaya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:22:20 by rababaya          #+#    #+#             */
-/*   Updated: 2025/03/21 18:11:05 by rababaya         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:07:18 by rababaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 int	g_status = 0;
 
