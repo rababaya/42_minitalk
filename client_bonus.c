@@ -6,7 +6,7 @@
 /*   By: rababaya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:22:20 by rababaya          #+#    #+#             */
-/*   Updated: 2025/03/23 13:07:18 by rababaya         ###   ########.fr       */
+/*   Updated: 2025/04/05 12:57:17 by rababaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ int	main(int argc, char **argv)
 		send_bit('\0', server_pid);
 	}
 	else
+	{
 		ft_putstr_fd("Wrong argument number", 2);
+		exit(1);
+	}
 	while (1)
 		pause();
 }
